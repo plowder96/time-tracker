@@ -23,3 +23,6 @@ htmlcov/
 # Agent Docs
 agent_docs/*
 test_results.md
+
+# Local hacky tests
+*play*

@@ -2,7 +2,8 @@
 
 from datetime import date
 import sqlite3
-
+import os
+from pathlib import Path
 import pytest
 
 from time_tracker.storage import (
@@ -15,6 +16,9 @@ DAY = date(2026, 11, 5)
 
 
 def test_database_path_uses_only_absolute_xdg_home(tmp_path):
+    assert resolve_database_path(environ={}, home=None) == (
+        Path(os.environ["HOME"]) / ".local/share/time-tracker/time-tracker.sqlite3"
+    )
     home = tmp_path / "home"
     assert resolve_database_path(environ={}, home=home) == (
         home / ".local/share/time-tracker/time-tracker.sqlite3"
